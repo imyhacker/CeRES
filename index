@@ -4,7 +4,7 @@
 /*
  ============ {IndoSec Framework} =============
 	Coded By Arikun - IndoSec
-	Tools : HackVisit (Auto Visitor)
+	Tools : CeRES (Cek Resi)
 	Copyrigt (C) 2020 - Nii-san Hax0r
  
  ============ {IndoSec Framework} =============
@@ -34,7 +34,7 @@ function os()
 }
 function lacak($nores, $kurir)
 {
-	$url = file_get_contents('http://yaelahtih.com/resi/apiv2.php?resi='.$nores.'&kurir='.$kurir);	
+	$url = file_get_contents('https://yaelahtih.com/resi/apiv2.php?resi='.$nores.'&kurir='.$kurir);	
 	$js = json_decode($url);
 	os();
 	banner();
