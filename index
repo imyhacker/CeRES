@@ -1,0 +1,104 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ ============ {IndoSec Framework} =============
+	Coded By Arikun - IndoSec
+	Tools : HackVisit (Auto Visitor)
+	Copyrigt (C) 2020 - Nii-san Hax0r
+ 
+ ============ {IndoSec Framework} =============
+*/
+
+error_reporting(0);
+function banner()
+{
+ echo "
+    \ /
+    oVo
+\___XXX___/   CeRES V.0.1
+ __XXXXX__    Crafted By Arikun - IndoSec
+/__XXXXX__\   Copyright (C) 2020 - Nii-sanHax0r
+/   XXX   \
+     V
+ \n";
+}
+function os()
+{
+	$os = PHP_OS;
+	if ($os = "linux") {
+		system("clear");
+	}elseif ($os = "windows") {
+		system("cls");
+	}
+}
+function lacak($nores, $kurir)
+{
+	$url = file_get_contents('http://yaelahtih.com/resi/apiv2.php?resi='.$nores.'&kurir='.$kurir);	
+	$js = json_decode($url);
+	os();
+	banner();
+	if ($js->status === 'Resi Tidak ditemukan Atau Tidak Valid') {
+		os();
+	banner();
+	echo "Resi Dan Kurir Anda Tidak Sesuai !\n";
+	die;
+	}elseif ($js->status === 'Kurir belom di support gan') {
+		os();
+	banner();
+	echo "Kurir Belum Tersedia, Mohon Tunggu Update Selanjutnya !\n";
+	die;
+	}else{
+	echo "== [Informasi] ==\n";
+	echo "No Resi 	: ".$js->AWB."\n";
+	echo "Pengirim 	: ".$js->Pengirim."\n";
+	echo "Penerima 	: ".$js->Penerima."\n";
+	echo "Asal 		: ".$js->KotaAsal."\n";
+	echo "Tujuan		: ".$js->Tujuan."\n\n";
+	echo "== [History] ==\n";
+	foreach ($js->History as $key1 => $res) {
+		echo "Tanggal	: ".$res->Tanggal."\n";
+		echo "Lokasi	: ".$res->Lokasi."\n";
+		echo "Status	: ".$res->Status."\n";
+		echo "Ket	: ".$res->Keterangan."\n";
+		echo "===============\n";
+	}
+}
+
+}
+
+
+
+//$url = file_get_contents('http://yaelahtih.com/resi/apiv2.php?resi=YOUR_AWB_OR_RESI&kurir=');
+
+
+if (!$argv[1] && !$argv[2]) {
+	os();
+	banner();
+	echo "Using --help For More Information\n";
+	echo "[Usage]	: php index {kurir} {resi/awb}\n";
+}elseif ($argv[1] && $argv[2]) {
+	$nores = $argv[2];
+	if ($argv[1] == 'jne' || $argv[1] == 'JNE') {
+		$kurir = 'jne';
+	}elseif($argv[1] == 'jnt' || $argv[1] == 'JNT' || $argv[1] == 'j&t' || $argv[1] == 'J&T'){
+		$kurir = 'jnt';
+	}elseif ($argv[1] == 'ninja' || $argv[1] == 'NINJA') {
+		$kurir = 'ninja';		
+	}else{
+		os();
+		banner();
+		echo "Using --help For More Information\n";
+		die;
+	}
+	lacak($nores, $kurir);
+
+}elseif($argv[1] == '--help'){
+	os();
+	banner();
+	echo "[Usage]	: php index {kurir} {resi/awb}\n\n";
+	echo "== [Kurir] ==\n";
+	echo "> JNE\n";
+	echo "> JNT\n";
+	echo "> NINJA\n";
+}
