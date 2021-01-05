@@ -67,11 +67,6 @@ function lacak($nores, $kurir)
 
 }
 
-
-
-//$url = file_get_contents('http://yaelahtih.com/resi/apiv2.php?resi=YOUR_AWB_OR_RESI&kurir=');
-
-
 if (!$argv[1] && !$argv[2]) {
 	os();
 	banner();
